@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "feature": "{{FEATURE_NAME}}",
+  "mode": "auto-sdd",
+  "started_at": "{{TIMESTAMP}}",
+  "updated_at": "{{TIMESTAMP}}",
+  "initiated_by": "{{INITIATOR}}",
+  "stage": "requirements",
+  "artifact_hashes": {
+    "requirements": null,
+    "design": null,
+    "tasks": null
+  },
+  "reviews": {
+    "requirements": { "status": "pending", "content_hash": null, "reviewed_at": null, "reviewer": null, "attempt": 0 },
+    "design": { "status": "pending", "content_hash": null, "reviewed_at": null, "reviewer": null, "attempt": 0 },
+    "tasks": { "status": "pending", "content_hash": null, "reviewed_at": null, "reviewer": null, "attempt": 0 }
+  },
+  "correction_cycles": {
+    "requirements": 0,
+    "design": 0,
+    "tasks": 0,
+    "implementation": 0,
+    "validation": 0
+  },
+  "token_governance": {
+    "soft_budget": null,
+    "hard_budget": null,
+    "currency": "USD",
+    "input_tokens": 0,
+    "cached_input_tokens": 0,
+    "output_tokens": 0,
+    "estimated_cost": 0,
+    "warn_at_percent": 75,
+    "require_approval_at_percent": 100
+  },
+  "model_policy": {
+    "strategy": "lowest-adequate",
+    "require_explicit_model": true,
+    "on_no_adequate_model": "block",
+    "provider": null,
+    "catalog": [],
+    "cataloged_at": null
+  },
+  "validation_policy": {
+    "profile": "pending",
+    "selected_at": null,
+    "rationale": null,
+    "risk_factors": [],
+    "artifact_review_mode": "pending",
+    "wave_validation_mode": "pending",
+    "final_validation_mode": "pending"
+  },
+  "validation_policy_hash": null,
+  "implementation_gate": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null,
+    "spec_revision": null,
+    "requirements_hash": null,
+    "design_hash": null,
+    "tasks_hash": null,
+    "plan_hash": null,
+    "validation_policy_hash": null
+  },
+  "plan_hash": null,
+  "waves": [],
+  "final_validation": {
+    "status": "pending",
+    "agent": null,
+    "attempt": 0,
+    "mode": "pending",
+    "reused_wave": null,
+    "scope_summary": null,
+    "model_requirement": {
+      "capability": "pending",
+      "risk_factors": [],
+      "rationale": "Derived after the lean, standard, or critical validation profile is selected."
+    },
+    "model_assignment": null
+  },
+  "recoveries": [],
+  "history": []
+}

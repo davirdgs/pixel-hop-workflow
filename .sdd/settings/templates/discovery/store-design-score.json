@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "assessed_at": "{{ISO_TIMESTAMP}}",
+  "policy_checked_at": "{{ISO_TIMESTAMP}}",
+  "target_platforms": ["ios", "android"],
+  "criteria": [
+    { "id": "distinct_user_value", "weight": 25, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "functional_depth", "weight": 20, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "original_identity", "weight": 15, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "mobile_quality", "weight": 15, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "honest_presentation", "weight": 10, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "sustainable_experience", "weight": 10, "apple_score": 0, "google_score": 0, "rationale": "[Evidence-backed rationale]", "evidence_refs": [] },
+    { "id": "platform_policy_fit", "weight": 5, "apple_score": 0, "google_score": 0, "rationale": "[Apple- and Google-specific rationale]", "evidence_refs": [] }
+  ],
+  "apple_spam_assessment": {
+    "assessment_version": 1,
+    "confidence": "low",
+    "track_4_3_a": {
+      "risk": "unknown",
+      "code_asset_provenance": "unknown",
+      "near_duplicate_portfolio": false,
+      "rationale": "[Code, asset, template, Bundle ID, and portfolio provenance]",
+      "evidence_refs": []
+    },
+    "track_4_3_b": {
+      "risk": "unknown",
+      "likely_category": "[Category inferred from name, screenshots, onboarding, and dominant function]",
+      "explicitly_established_category": false,
+      "closest_comparator_count": 0,
+      "market_has_fewer_comparators": false,
+      "comparison_scope": "[Stores, markets, queries, dates, and why these are the closest alternatives]",
+      "core_loop_overlap": "unknown",
+      "strong_difference_axes": [],
+      "supporting_difference_axes": [],
+      "weak_difference_axes": [],
+      "first_value_visibility": "unknown",
+      "proof_level": "concept_only",
+      "adversarial_rejection_case": "[Strongest honest one-sentence case that the app is substitutable]",
+      "reviewer_case": "[One-sentence difference plus exact demo path and evidence]",
+      "evidence_refs": []
+    },
+    "residual_subjectivity": "[What a reasonable reviewer could still interpret differently]"
+  },
+  "apple": {
+    "applicable": true,
+    "score": 0,
+    "verdict": "stop",
+    "hard_flags": [],
+    "policy_risks": { "apple_4_3_b": "unknown", "repetitive_content": "not_applicable", "minimum_functionality": "unknown" }
+  },
+  "google": {
+    "applicable": true,
+    "score": 0,
+    "verdict": "stop",
+    "hard_flags": [],
+    "policy_risks": { "apple_4_3_b": "not_applicable", "repetitive_content": "unknown", "minimum_functionality": "unknown" }
+  },
+  "overall": {
+    "score": 0,
+    "verdict": "stop",
+    "hard_stop": false,
+    "rationale": "[Use the lower score among targeted platforms and explain any hard flag.]"
+  }
+}

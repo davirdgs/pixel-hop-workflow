@@ -1,0 +1,15 @@
+{
+  "captured_at": "2026-01-01T00:00:00.000Z",
+  "evidence_id": "E-001",
+  "evidence_type": "web",
+  "url": "https://example.com/source",
+  "title": "Current source title",
+  "source_type": "primary",
+  "direction": "supports",
+  "claim": "The specific claim supported by this source",
+  "method": "Direct inspection of a current primary source",
+  "confidence": "medium",
+  "limitations": "State the sample, market, scope, and uncertainty",
+  "fresh_until": "2026-04-01T00:00:00.000Z",
+  "note": "Project relevance and any additional context"
+}

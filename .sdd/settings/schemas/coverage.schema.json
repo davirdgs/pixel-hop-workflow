@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SDD Requirement Coverage Exceptions",
+  "type": "object",
+  "required": ["schema_version", "exceptions"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "exceptions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["status", "rationale"],
+        "properties": {
+          "status": { "enum": ["deferred", "conditional", "out_of_scope", "cancelled", "superseded"] },
+          "rationale": { "type": "string", "minLength": 10 },
+          "review_trigger": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+image: node:22
+
+pipelines:
+  default:
+    - step:
+        name: Validate SDD framework distribution
+        script:
+          - npm test
+          - npm run verify
+
+  pull-requests:
+    '**':
+      - step:
+          name: Validate SDD framework pull request
+          script:
+            - npm test
+            - npm run verify

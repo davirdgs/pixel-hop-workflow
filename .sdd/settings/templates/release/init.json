@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "contract_version": 2,
+  "release_name": "__RELEASE_NAME__",
+  "created_at": "__ISO_TIMESTAMP__",
+  "updated_at": "__ISO_TIMESTAMP__",
+  "language": "__LANGUAGE__",
+  "release_version": null,
+  "source_specs": [],
+  "target_platforms": ["ios"],
+  "context_profiles": [],
+  "candidate": {
+    "commit": "__COMMIT__",
+    "version": "__VERSION__",
+    "build": "__BUILD__",
+    "artifact_digest": "__SHA256__",
+    "environment": "__ENVIRONMENT__",
+    "verified_at": "__ISO_TIMESTAMP__"
+  },
+  "scope": {
+    "platforms": ["ios"],
+    "storefronts": [],
+    "markets": [],
+    "locales": []
+  },
+  "constraints": {
+    "owner_capacity": null,
+    "total_budget": null,
+    "paid_media_ceiling": null,
+    "currency": null
+  },
+  "lifecycle": {
+    "phase": "readiness",
+    "readiness": "in_progress",
+    "go_to_market": "not_started",
+    "assets": "not_started",
+    "measurement": "not_started",
+    "launch": "not_started",
+    "observation": "not_started",
+    "growth": "not_started"
+  },
+  "launch_gate": {
+    "status": "pending",
+    "approved_by": null,
+    "approved_at": null,
+    "candidate_digest": null,
+    "scope_digest": null,
+    "artifact_hashes": {
+      "pre_release_checklist": null,
+      "marketing_plan": null,
+      "store_assets": null,
+      "measurement_plan": null,
+      "launch_plan": null
+    }
+  },
+  "paid_media_gate": {
+    "status": "not_configured",
+    "approved_by": null,
+    "approved_at": null,
+    "channel": null,
+    "experiment_id": null,
+    "conversion_event": null,
+    "currency": null,
+    "hard_cap": null,
+    "spend_actual": 0,
+    "starts_on": null,
+    "ends_on": null,
+    "timezone": null,
+    "stop_rules": null
+  },
+  "gate_history": [],
+  "history": []
+}

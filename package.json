@@ -1,0 +1,13 @@
+{
+  "name": "pixel-hop-workflow",
+  "version": "2.10.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test .sdd/tools/sdd.test.mjs scripts/install.test.mjs",
+    "verify": "node scripts/verify-distribution.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

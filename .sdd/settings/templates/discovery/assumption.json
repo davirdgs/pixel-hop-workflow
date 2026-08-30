@@ -1,0 +1,15 @@
+{
+  "id": "A-1",
+  "iteration": 1,
+  "category": "desirability",
+  "statement": "The primary user experiences the problem often enough to change behavior.",
+  "impact": "critical",
+  "uncertainty": "high",
+  "evidence_refs": [],
+  "test": "Interview or observe representative users using the current workaround.",
+  "decision_threshold": "A predeclared proportion demonstrates recurring behavior and switching intent.",
+  "cash_time_cap": "Define before testing",
+  "state": "untested",
+  "fresh_until": null,
+  "updated_at": "2026-01-01T00:00:00.000Z"
+}

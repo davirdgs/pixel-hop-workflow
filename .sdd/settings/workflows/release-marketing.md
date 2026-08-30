@@ -1,0 +1,9 @@
+# Workflow: release-marketing
+
+1. Follow `_common.md`, `release-principles.md`, `release-marketing.md`, and `research-sources.md`; load the release context, discovery/business case when present, product steering, monetization/analytics implementation, target markets, and existing brand/marketing assets.
+2. Confirm only material missing constraints: objective, audience/market, total/paid budget and currency, time horizon, price/contribution or LTV range, maximum CAC/payback, capacity, and prohibited claims/channels. Never invent these values; use labeled scenario ranges when exact inputs are immature.
+3. Research current audience-reachable organic and paid channels, official targeting/measurement/policy capabilities, and relevant independent benchmarks. Append claim-level records with `sdd.mjs source release` using the shared source contract, including market/category/sample limitations and project relevance in `note`.
+4. Write `marketing-plan.md` from the template: positioning/proof, objections, message-store-page match, channel scorecard, organic calendar, bounded paid tests, asset matrix, budget allocation, and scale/iterate/stop rules. A zero-paid-budget plan is valid and must still account for founder time and measurement.
+5. Mark go-to-market `ready` only when the selected portfolio fits the confirmed budget/capacity and every selected channel has a measurable hypothesis and downside cap. Otherwise use `rework_required`. Advance to the earliest incomplete phase, update history, and run SDD lint.
+6. This workflow plans campaigns; it does not publish content, contact creators, create accounts, or spend money.
+7. A user may explicitly override the planning verdict with `sdd.mjs override release <name> go_to_market <go|no-go> <actor> --reason <reason>`. Paid activity still requires the separate gate with experiment ID, conversion event, timezone, spend accounting, and stop rules.

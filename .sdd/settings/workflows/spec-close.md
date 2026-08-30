@@ -1,0 +1,8 @@
+# Workflow: spec-close
+
+1. Follow `_common.md`, but load only `spec.json`, optional `auto-sdd.json`, and active claims for the named feature. Do not load or reconcile requirements, design, tasks, code, evidence, or validation artifacts merely to close the spec.
+2. Require an explicit user instruction that the spec will not be implemented or continued, plus one closure reason: `obsolete`, `superseded`, `cancelled`, `duplicate`, or `no-longer-needed`. Record a concise note and `superseded_by` when applicable.
+3. This is a deterministic administrative transition. Do not create subagents, run builds/tests, research current behavior, regenerate artifacts, repair hashes, fill coverage gaps, approve artifacts, or run implementation validation.
+4. Refuse closure while the feature has active claims. Report the claims and require their owners to finish or release them explicitly with `--abandon`; never discard active work implicitly.
+5. Run `node .sdd/tools/sdd.mjs close <feature> <reason> <actor> [--note <text>] [--superseded-by <feature>]`. The helper preserves artifact bytes and implementation/validation history, sets lifecycle phase and legacy phase to `closed`, records closure provenance, clears `ready_for_implementation`, and revokes any auto-SDD implementation gate. For pre-v2 metadata, it deterministically adds only the minimal v2 lifecycle envelope and records that metadata upgrade; it still does not read or rewrite artifact content.
+6. Run SDD lint. Report the spec as terminally closed, not completed or validated. No further lifecycle action is required unless a future explicit reopen workflow is introduced.

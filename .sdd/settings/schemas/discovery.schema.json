@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/discovery.schema.json",
+  "title": "SDD Product Discovery Metadata v1",
+  "type": "object",
+  "required": ["schema_version", "discovery_name", "created_at", "updated_at", "language", "iteration", "lifecycle"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "discovery_name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "language": { "type": "string", "minLength": 2 },
+    "iteration": { "type": "integer", "minimum": 1 },
+    "profile": { "const": "single-mobile-indie" },
+    "evidence_mode": { "enum": ["desk_only", "primary", "mixed", "not_assessed"] },
+    "selected_hypothesis": { "type": ["string", "null"] },
+    "promoted_spec": { "type": ["string", "null"], "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "lifecycle": {
+      "type": "object",
+      "required": ["phase", "brainstorm", "market_validation", "business_case", "product_outline", "decision", "promotion"],
+      "properties": {
+        "phase": { "enum": ["brainstorm", "market_validation", "business_case", "product_outline", "decision", "complete"] },
+        "brainstorm": { "enum": ["in_progress", "selected"] },
+        "market_validation": { "enum": ["not_started", "in_progress", "supports", "mixed", "contradicts"] },
+        "business_case": { "enum": ["not_started", "in_progress", "viable", "conditional", "unviable"] },
+        "product_outline": { "enum": ["not_started", "in_progress", "ready", "rework_required"] },
+        "decision": { "enum": ["not_started", "go", "pivot", "stop"] },
+        "promotion": { "enum": ["not_eligible", "eligible", "created"] }
+      },
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["at", "event"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "event": { "type": "string" },
+          "iteration": { "type": "integer", "minimum": 1 },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "gate_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateHistory" }
+    }
+  },
+  "$defs": {
+    "gateHistory": {
+      "type": "object",
+      "required": ["at", "gate", "decision", "actor", "mode", "reason"],
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "gate": { "enum": ["market_validation", "business_case", "product_outline", "decision"] },
+        "decision": { "enum": ["go", "no-go"] },
+        "actor": { "type": "string", "minLength": 1 },
+        "mode": { "const": "manual-override" },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}
