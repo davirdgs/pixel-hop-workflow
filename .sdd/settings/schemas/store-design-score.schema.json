@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/store-design-score.schema.json",
+  "title": "Store Design Readiness Score",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "assessed_at", "policy_checked_at", "target_platforms", "criteria", "apple", "google", "overall"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "assessed_at": { "type": "string", "format": "date-time" },
+    "policy_checked_at": { "type": "string", "format": "date-time" },
+    "target_platforms": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["ios", "android"] }
+    },
+    "criteria": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "weight", "apple_score", "google_score", "rationale", "evidence_refs"],
+        "properties": {
+          "id": { "enum": ["distinct_user_value", "functional_depth", "original_identity", "mobile_quality", "honest_presentation", "sustainable_experience", "platform_policy_fit"] },
+          "weight": { "type": "integer", "minimum": 1, "maximum": 100 },
+          "apple_score": { "type": ["integer", "null"], "minimum": 0, "maximum": 5 },
+          "google_score": { "type": ["integer", "null"], "minimum": 0, "maximum": 5 },
+          "rationale": { "type": "string", "minLength": 1 },
+          "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+        }
+      }
+    },
+    "apple_spam_assessment": {
+      "anyOf": [
+        { "type": "null" },
+        { "$ref": "#/$defs/appleSpamAssessment" }
+      ]
+    },
+    "apple": { "$ref": "#/$defs/platform" },
+    "google": { "$ref": "#/$defs/platform" },
+    "overall": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["score", "verdict", "hard_stop", "rationale"],
+      "properties": {
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "verdict": { "enum": ["strong", "conditional", "high_risk", "stop"] },
+        "hard_stop": { "type": "boolean" },
+        "rationale": { "type": "string", "minLength": 1 }
+      }
+    }
+  },
+  "$defs": {
+    "appleSpamAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["assessment_version", "confidence", "track_4_3_a", "track_4_3_b", "residual_subjectivity"],
+      "properties": {
+        "assessment_version": { "const": 1 },
+        "confidence": { "enum": ["low", "medium", "high"] },
+        "residual_subjectivity": { "type": "string", "minLength": 1 },
+        "track_4_3_a": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["risk", "code_asset_provenance", "near_duplicate_portfolio", "rationale", "evidence_refs"],
+          "properties": {
+            "risk": { "enum": ["low", "medium", "high", "unknown"] },
+            "code_asset_provenance": { "enum": ["original", "licensed_template", "shared_codebase", "unknown"] },
+            "near_duplicate_portfolio": { "type": "boolean" },
+            "rationale": { "type": "string", "minLength": 1 },
+            "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        },
+        "track_4_3_b": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["risk", "likely_category", "explicitly_established_category", "closest_comparator_count", "market_has_fewer_comparators", "comparison_scope", "core_loop_overlap", "strong_difference_axes", "supporting_difference_axes", "weak_difference_axes", "first_value_visibility", "proof_level", "adversarial_rejection_case", "reviewer_case", "evidence_refs"],
+          "properties": {
+            "risk": { "enum": ["low", "medium", "high", "unknown"] },
+            "likely_category": { "type": "string", "minLength": 1 },
+            "explicitly_established_category": { "type": "boolean" },
+            "closest_comparator_count": { "type": "integer", "minimum": 0 },
+            "market_has_fewer_comparators": { "type": "boolean" },
+            "comparison_scope": { "type": "string", "minLength": 1 },
+            "core_loop_overlap": { "enum": ["low", "medium", "high", "unknown"] },
+            "strong_difference_axes": { "$ref": "#/$defs/differenceAxes" },
+            "supporting_difference_axes": { "$ref": "#/$defs/differenceAxes" },
+            "weak_difference_axes": { "$ref": "#/$defs/differenceAxes" },
+            "first_value_visibility": { "enum": ["immediately", "before_first_value", "after_first_value", "buried", "absent", "unknown"] },
+            "proof_level": { "enum": ["concept_only", "prototype", "implemented", "implemented_and_user_validated", "unknown"] },
+            "adversarial_rejection_case": { "type": "string", "minLength": 1 },
+            "reviewer_case": { "type": "string", "minLength": 1 },
+            "evidence_refs": { "type": "array", "items": { "type": "string", "minLength": 1 } }
+          }
+        }
+      }
+    },
+    "differenceAxes": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "enum": ["core_mechanic", "user_outcome", "exclusive_or_proprietary_data", "unique_integration", "recurring_workflow", "business_model", "trust_or_privacy_model", "accessibility", "operational_model", "audience_niche", "cosmetic_ui", "branding", "language", "content_volume", "generic_ai", "peripheral_feature"]
+      }
+    },
+    "platform": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applicable", "score", "verdict", "hard_flags", "policy_risks"],
+      "properties": {
+        "applicable": { "type": "boolean" },
+        "score": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+        "verdict": { "enum": ["strong", "conditional", "high_risk", "stop", "not_applicable"] },
+        "hard_flags": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "policy_risks": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["apple_4_3_b", "repetitive_content", "minimum_functionality"],
+          "properties": {
+            "apple_4_3_b": { "enum": ["low", "medium", "high", "unknown", "not_applicable"] },
+            "repetitive_content": { "enum": ["low", "medium", "high", "unknown", "not_applicable"] },
+            "minimum_functionality": { "enum": ["low", "medium", "high", "unknown", "not_applicable"] }
+          }
+        }
+      }
+    }
+  }
+}

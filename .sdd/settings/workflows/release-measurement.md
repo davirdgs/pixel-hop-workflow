@@ -1,0 +1,9 @@
+# Workflow: release-measurement
+
+1. Follow `_common.md`, `release-principles.md`, and `release-measurement-growth.md`; load the release context, source requirements/design, implemented analytics/attribution/commerce, privacy/consent behavior, store/ad reporting, backend/finance sources, and current dashboards.
+2. Write `measurement-plan.md` with the decision metric tree, exact funnel definitions, event/conversion contract, campaign taxonomy, attribution/windows, privacy limits, reconciliation, baselines/targets/guardrails/kill thresholds, data-quality alerts, dashboard ownership, and observation cadence.
+3. Inspect and safely validate critical paths end-to-end: campaign/deep link where possible, first open, consent, onboarding, activation/value, paywall/trial/purchase/restore/refund, retention marker, crash/performance, and cost signals. Record evidence and any production/device/console boundary.
+4. Reject ambiguous metrics that lack numerator/denominator, source, cohort, window, or decision. Do not accept a dashboard screenshot as proof that event semantics and deduplication are correct.
+5. Mark measurement `ready` only when launch decisions can be made from validated data without violating consent/privacy and owners can access the sources. Otherwise use `rework_required`, update history, and run SDD lint.
+6. Include acquisition, activation, retention, revenue, and conditionally referral plus reactivation. Referral requires eligible → invite/share → accepted → activated → retained/revenue; reactivation requires eligibility, consent, frequency, opt-out, return to core value, and an incrementality method.
+7. A user may override the planning verdict with `sdd.mjs override release <name> measurement <go|no-go> <actor> --reason <reason>`. The override cannot label broken, missing, duplicated, or consent-violating data as valid.

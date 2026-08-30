@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/research-source.schema.json",
+  "title": "SDD Research Source Record",
+  "type": "object",
+  "required": ["captured_at", "title", "source_type", "direction", "claim", "note"],
+  "properties": {
+    "captured_at": { "type": "string", "format": "date-time" },
+    "url": { "type": "string", "format": "uri", "pattern": "^https?://" },
+    "reference": { "type": "string" },
+    "evidence_id": { "type": "string", "minLength": 1 },
+    "evidence_type": { "enum": ["web", "interview", "observation", "usability-test", "survey", "analytics", "support", "experiment", "repository", "document"] },
+    "method": { "type": "string" },
+    "confidence": { "enum": ["low", "medium", "high"] },
+    "limitations": { "type": "string" },
+    "fresh_until": { "type": "string", "format": "date-time" },
+    "title": { "type": "string", "minLength": 1 },
+    "source_type": { "type": "string", "minLength": 1 },
+    "direction": { "enum": ["supports", "contradicts", "constrains", "context"] },
+    "claim": { "type": "string", "minLength": 1 },
+    "note": { "type": "string", "minLength": 1 }
+  },
+  "allOf": [
+    {
+      "if": {
+        "anyOf": [
+          { "not": { "required": ["evidence_type"] } },
+          { "properties": { "evidence_type": { "const": "web" } }, "required": ["evidence_type"] }
+        ]
+      },
+      "then": { "required": ["url"] }
+    }
+  ],
+  "additionalProperties": true
+}

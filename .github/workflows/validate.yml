@@ -1,0 +1,42 @@
+name: Validate SDD framework distribution
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: validate-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Tests and distribution verification
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # The framework declares no runtime or development dependencies:
+      # every tool runs on the Node.js standard library, so no install step
+      # is required and there is no lockfile to restore.
+      - name: Report Node.js version
+        run: node --version
+
+      - name: Run framework and installer tests
+        run: npm test
+
+      - name: Verify distribution completeness
+        run: npm run verify

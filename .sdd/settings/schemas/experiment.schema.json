@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/experiment.schema.json",
+  "title": "SDD Growth Experiment v1",
+  "type": "object",
+  "required": ["schema_version", "id", "owner", "release", "candidate_digest", "hypothesis", "status", "exposure_unit", "assignment_method", "primary_metric", "guardrails", "decision_rule", "learning_destination"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "id": { "type": "string", "minLength": 1 },
+    "owner": { "type": "string", "minLength": 1 },
+    "release": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "candidate_digest": { "type": "string", "minLength": 1 },
+    "hypothesis": { "type": "string", "minLength": 1 },
+    "status": { "enum": ["planned", "running", "win", "loss", "inconclusive", "invalid", "stopped"] },
+    "exposure_unit": { "type": "string", "minLength": 1 },
+    "assignment_method": { "type": "string", "minLength": 1 },
+    "primary_metric": { "type": "string", "minLength": 1 },
+    "guardrails": { "type": "array", "items": { "type": "string" } },
+    "minimum_run": { "type": ["string", "null"] },
+    "decision_rule": { "type": "string", "minLength": 1 },
+    "spend": { "type": "number", "minimum": 0 },
+    "learning_destination": { "enum": ["release", "marketing-assets", "sdd", "discovery", "steering-index"] },
+    "result_summary": { "type": ["string", "null"] }
+  },
+  "additionalProperties": false
+}

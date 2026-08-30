@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/metrics-snapshot.schema.json",
+  "title": "SDD Release Metrics Snapshot v1",
+  "type": "object",
+  "required": ["schema_version", "snapshot_id", "release", "candidate_digest", "recorded_at", "window_start", "window_end", "timezone", "source", "cohorts", "metrics", "data_quality", "decision"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "snapshot_id": { "type": "string", "minLength": 1 },
+    "release": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "candidate_digest": { "type": "string", "minLength": 1 },
+    "recorded_at": { "type": "string", "format": "date-time" },
+    "window_start": { "type": "string", "format": "date-time" },
+    "window_end": { "type": "string", "format": "date-time" },
+    "timezone": { "type": "string", "minLength": 1 },
+    "source": { "type": "string", "minLength": 1 },
+    "cohorts": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "metrics": { "type": "object" },
+    "data_quality": { "enum": ["valid", "degraded", "invalid", "insufficient"] },
+    "baseline_id": { "type": ["string", "null"] },
+    "uncertainty": { "type": ["string", "null"] },
+    "decision": { "enum": ["stable", "alert", "insufficient_data"] }
+  },
+  "additionalProperties": false
+}

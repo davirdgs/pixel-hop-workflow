@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/assumption.schema.json",
+  "title": "SDD Discovery Assumption v1",
+  "type": "object",
+  "required": ["id", "iteration", "category", "statement", "impact", "uncertainty", "evidence_refs", "test", "decision_threshold", "state", "updated_at"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^A-[1-9][0-9]*$" },
+    "iteration": { "type": "integer", "minimum": 1 },
+    "category": { "enum": ["desirability", "viability", "feasibility", "usability", "distribution", "compliance"] },
+    "statement": { "type": "string", "minLength": 1 },
+    "impact": { "enum": ["low", "medium", "critical"] },
+    "uncertainty": { "enum": ["low", "medium", "high"] },
+    "evidence_refs": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "test": { "type": "string", "minLength": 1 },
+    "decision_threshold": { "type": "string", "minLength": 1 },
+    "cash_time_cap": { "type": ["string", "null"] },
+    "state": { "enum": ["untested", "testing", "supported", "contradicted", "invalidated"] },
+    "fresh_until": { "type": ["string", "null"], "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" }
+  },
+  "additionalProperties": false
+}

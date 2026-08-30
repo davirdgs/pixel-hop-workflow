@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/release.schema.json",
+  "title": "SDD Release and Growth Metadata v1",
+  "type": "object",
+  "required": ["schema_version", "release_name", "created_at", "updated_at", "language", "source_specs", "target_platforms", "context_profiles", "lifecycle", "launch_gate", "paid_media_gate", "history"],
+  "properties": {
+    "schema_version": { "const": 1 },
+    "contract_version": { "type": "integer", "minimum": 1 },
+    "release_name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "language": { "type": "string", "minLength": 2 },
+    "release_version": { "type": ["string", "null"] },
+    "source_specs": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }, "uniqueItems": true },
+    "target_platforms": { "type": "array", "items": { "enum": ["ios", "android", "web", "backend", "other"] }, "minItems": 1, "uniqueItems": true },
+    "context_profiles": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "candidate": { "$ref": "#/$defs/candidate" },
+    "scope": { "$ref": "#/$defs/scope" },
+    "constraints": {
+      "type": "object",
+      "properties": {
+        "owner_capacity": { "type": ["string", "null"] },
+        "total_budget": { "type": ["number", "null"], "minimum": 0 },
+        "paid_media_ceiling": { "type": ["number", "null"], "minimum": 0 },
+        "currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["phase", "readiness", "go_to_market", "assets", "measurement", "launch", "observation", "growth"],
+      "properties": {
+        "phase": { "enum": ["readiness", "go_to_market", "assets", "measurement", "launch", "observation", "growth", "complete"] },
+        "readiness": { "enum": ["not_started", "in_progress", "ready", "blocked"] },
+        "go_to_market": { "enum": ["not_started", "in_progress", "ready", "rework_required"] },
+        "assets": { "enum": ["not_started", "in_progress", "ready", "rework_required"] },
+        "measurement": { "enum": ["not_started", "in_progress", "ready", "rework_required"] },
+        "launch": { "enum": ["not_started", "planned", "approved", "in_progress", "launched", "paused", "rolled_back"] },
+        "observation": { "enum": ["not_started", "in_progress", "stable", "alert", "insufficient_data"] },
+        "growth": { "enum": ["not_started", "in_progress", "learning", "scaling", "paused", "complete"] }
+      },
+      "additionalProperties": false
+    },
+    "launch_gate": {
+      "type": "object",
+      "required": ["status", "approved_by", "approved_at", "artifact_hashes"],
+      "properties": {
+        "status": { "enum": ["pending", "approved", "revoked"] },
+        "approved_by": { "type": ["string", "null"] },
+        "approved_at": { "type": ["string", "null"], "format": "date-time" },
+        "candidate_digest": { "$ref": "#/$defs/hashOrNull" },
+        "scope_digest": { "$ref": "#/$defs/hashOrNull" },
+        "artifact_hashes": {
+          "type": "object",
+          "required": ["pre_release_checklist", "marketing_plan", "store_assets", "measurement_plan", "launch_plan"],
+          "properties": {
+            "pre_release_checklist": { "$ref": "#/$defs/hashOrNull" },
+            "marketing_plan": { "$ref": "#/$defs/hashOrNull" },
+            "store_assets": { "$ref": "#/$defs/hashOrNull" },
+            "measurement_plan": { "$ref": "#/$defs/hashOrNull" },
+            "launch_plan": { "$ref": "#/$defs/hashOrNull" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "paid_media_gate": {
+      "type": "object",
+      "required": ["status", "approved_by", "approved_at", "channel", "currency", "hard_cap", "starts_on", "ends_on"],
+      "properties": {
+        "status": { "enum": ["not_configured", "pending", "approved", "revoked", "exhausted"] },
+        "approved_by": { "type": ["string", "null"] },
+        "approved_at": { "type": ["string", "null"], "format": "date-time" },
+        "channel": { "type": ["string", "null"] },
+        "experiment_id": { "type": ["string", "null"] },
+        "conversion_event": { "type": ["string", "null"] },
+        "currency": { "type": ["string", "null"], "pattern": "^[A-Z]{3}$" },
+        "hard_cap": { "type": ["number", "null"], "minimum": 0 },
+        "spend_actual": { "type": "number", "minimum": 0 },
+        "starts_on": { "type": ["string", "null"], "format": "date" },
+        "ends_on": { "type": ["string", "null"], "format": "date" },
+        "timezone": { "type": ["string", "null"] },
+        "stop_rules": { "type": ["string", "null"] }
+      },
+      "additionalProperties": false
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["at", "event"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "event": { "type": "string" },
+          "note": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "gate_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateHistory" }
+    }
+  },
+  "$defs": {
+    "hashOrNull": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" },
+    "candidate": {
+      "type": "object",
+      "required": ["commit", "version", "build", "artifact_digest", "environment", "verified_at"],
+      "properties": {
+        "commit": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "build": { "type": "string", "minLength": 1 },
+        "artifact_digest": { "type": "string", "minLength": 1 },
+        "environment": { "type": "string", "minLength": 1 },
+        "verified_at": { "type": "string", "format": "date-time" }
+      },
+      "additionalProperties": false
+    },
+    "scope": {
+      "type": "object",
+      "required": ["platforms", "storefronts", "markets", "locales"],
+      "properties": {
+        "platforms": { "type": "array", "items": { "type": "string" }, "minItems": 1, "uniqueItems": true },
+        "storefronts": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "markets": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+        "locales": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+      },
+      "additionalProperties": false
+    },
+    "gateHistory": {
+      "type": "object",
+      "required": ["at", "gate", "decision", "actor", "mode", "reason"],
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "gate": { "enum": ["readiness", "go_to_market", "assets", "measurement"] },
+        "decision": { "enum": ["go", "no-go"] },
+        "actor": { "type": "string", "minLength": 1 },
+        "mode": { "const": "manual-override" },
+        "reason": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

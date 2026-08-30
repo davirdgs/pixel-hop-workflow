@@ -1,0 +1,159 @@
+{
+  "framework_version": "2.10.0",
+  "default_language": "en",
+  "project_profile": "mobile-platform",
+  "stack": {
+    "clients": ["ios", "android"],
+    "backend": true,
+    "firebase": ["auth", "analytics", "crashlytics", "messaging"],
+    "measurement": ["product-analytics", "sales-funnel", "attribution"]
+  },
+  "context": {
+    "strategy": "manifest-delta-first",
+    "manifest_file": ".sdd/runtime/context-manifest.json",
+    "reuse_unchanged_hashes": true,
+    "full_read_on": ["generation", "approval", "traceability-audit", "insufficient-targeted-context"],
+    "always": [
+      ".sdd/steering/product.md",
+      ".sdd/steering/tech.md",
+      ".sdd/steering/structure.md"
+    ],
+    "profiles": {
+      "ios": [".sdd/steering/ios-architecture.md"],
+      "android": [".sdd/steering/android-architecture.md"],
+      "backend": [
+        ".sdd/steering/api-standards.md",
+        ".sdd/steering/database.md",
+        ".sdd/steering/error-handling.md",
+        ".sdd/steering/testing.md"
+      ],
+      "auth": [".sdd/steering/authentication.md", ".sdd/steering/security.md"],
+      "analytics": [".sdd/steering/security.md", ".sdd/steering/testing.md"],
+      "notifications": [".sdd/steering/cross-repo.md", ".sdd/steering/security.md"],
+      "deployment": [".sdd/steering/deployment.md", ".sdd/steering/security.md"],
+      "cross-platform": [".sdd/steering/cross-repo.md"]
+    }
+  },
+  "verification": {
+    "default": "test-first",
+    "allowed_strategies": [
+      "test-first",
+      "contract-test",
+      "build-or-lint",
+      "migration-dry-run",
+      "manual-evidence"
+    ]
+  },
+  "parallelism": {
+    "claims_file": ".sdd/runtime/claims.json",
+    "require_write_scope": true
+  },
+  "discovery": {
+    "profile": "single-mobile-indie",
+    "developer_count": 1,
+    "prefer_self_service": true,
+    "require_current_market_research": true,
+    "target_platforms": [],
+    "currency": null,
+    "weekly_hours": null,
+    "validation_budget": null,
+    "mvp_budget": null,
+    "decision_horizon_months": null,
+    "require_evidence_mode": true,
+    "require_assumption_ledger": true,
+    "require_proportional_concept_validation": true
+  },
+  "auto_sdd": {
+    "max_parallel_executors": 3,
+    "max_correction_attempts_per_wave": 3,
+    "max_pre_implementation_correction_attempts_per_artifact": 3,
+    "require_independent_validator": true,
+    "recovery": {
+      "strategy": "audit-before-resume",
+      "preserve_worktree": true,
+      "continue_only_when_agent_is_live": true,
+      "increment_attempt_on_session_loss": true,
+      "reverify_complete_target": true
+    },
+    "validation_optimization": {
+      "strategy": "adaptive",
+      "default_profile": "standard",
+      "reuse_hash_bound_reviews": true,
+      "allow_single_wave_validator_as_final": true,
+      "batch_independent_waves": true,
+      "run_full_regression_once": true
+    },
+    "model_selection": {
+      "strategy": "lowest-adequate",
+      "require_explicit_model": true,
+      "on_no_adequate_model": "block",
+      "provider_catalogs": {
+        "codex": [
+          {
+            "model": "gpt-5.6-terra",
+            "capability": "advanced",
+            "cost_rank": 1
+          },
+          {
+            "model": "gpt-5.6-sol",
+            "capability": "frontier",
+            "cost_rank": 2
+          }
+        ],
+        "claude": [
+          {
+            "model": "claude-haiku-4-5-20251001",
+            "capability": "routine",
+            "cost_rank": 1
+          },
+          {
+            "model": "claude-sonnet-5",
+            "capability": "advanced",
+            "cost_rank": 2
+          },
+          {
+            "model": "claude-opus-4-8",
+            "capability": "frontier",
+            "cost_rank": 3
+          }
+        ]
+      }
+    },
+    "token_governance": {
+      "currency": "USD",
+      "soft_budget": null,
+      "hard_budget": null,
+      "max_input_tokens_per_agent": null,
+      "max_output_tokens_per_agent": null,
+      "warn_at_percent": 75,
+      "require_approval_at_percent": 100,
+      "record_usage_per_agent": true,
+      "on_hard_budget": "block-and-request-decision"
+    }
+  },
+  "release": {
+    "profile": "single-mobile-indie",
+    "target_markets": [],
+    "target_locales": [],
+    "release_budget": null,
+    "paid_media_budget": null,
+    "currency": null,
+    "support_capacity": null,
+    "require_current_channel_research": true,
+    "require_explicit_publication_gate": true,
+    "require_separate_paid_media_gate": true,
+    "research_freshness_days": {
+      "store-policy": 30,
+      "pricing": 30,
+      "channel-capability": 60,
+      "benchmark": 90
+    },
+    "applicability": {
+      "paid_media": "conditional",
+      "referral": "conditional",
+      "lifecycle_messaging": "conditional",
+      "localization": "conditional",
+      "commerce": "conditional"
+    }
+  }
+}

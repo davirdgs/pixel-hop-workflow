@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "discovery_name": "{{DISCOVERY_NAME}}",
+  "created_at": "{{TIMESTAMP}}",
+  "updated_at": "{{TIMESTAMP}}",
+  "language": "en",
+  "iteration": 1,
+  "profile": "single-mobile-indie",
+  "evidence_mode": "not_assessed",
+  "selected_hypothesis": null,
+  "promoted_spec": null,
+  "lifecycle": {
+    "phase": "brainstorm",
+    "brainstorm": "in_progress",
+    "market_validation": "not_started",
+    "business_case": "not_started",
+    "product_outline": "not_started",
+    "decision": "not_started",
+    "promotion": "not_eligible"
+  },
+  "gate_history": [],
+  "history": []
+}

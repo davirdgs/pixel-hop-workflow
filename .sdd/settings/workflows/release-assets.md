@@ -1,0 +1,9 @@
+# Workflow: release-assets
+
+1. Follow `_common.md`, `release-principles.md`, `release-assets.md`, and `research-sources.md`; load the release context, marketing plan when present, live app/brand/localization, current store metadata/automation, and target platform/storefront documentation.
+2. Research current official field limits, screenshot/video/device requirements, content/claim policies, localization behavior, and placement specifications. Append mutable source facts with `sdd.mjs source release` using the shared source contract.
+3. Create `store-assets.md` with the complete metadata matrix, screenshot narrative, raw-capture fixture/state plan, localized copy, creative matrix, destination/store-page mapping, validation evidence, and an asset registry with stable ID, hash, locale, claim/proof, rights, expiry, and experiment/performance references.
+4. When the user requested material creation and the environment supports it, capture real candidate UI using deterministic privacy-safe data, then produce reproducible marketing compositions and localized variants in project-owned paths. Reuse the project's brand system and automation. Never generate fictitious UI or features.
+5. Verify dimensions/formats/order, readability at thumbnail size, crop/safe areas, localization, accessibility, claims, public/legal URLs, pricing/feature truth, and upload/dry-run behavior. Mark console-only or device-only work explicitly.
+6. Set assets to `ready` only when every required platform/locale asset is generated and validated or has an accepted external boundary that still keeps launch blocked. Otherwise use `rework_required`. Update history and run SDD lint.
+7. A user may override the planning verdict with `sdd.mjs override release <name> assets <go|no-go> <actor> --reason <reason>`. Missing or fictitious assets remain visible and cannot be recorded as validated evidence.

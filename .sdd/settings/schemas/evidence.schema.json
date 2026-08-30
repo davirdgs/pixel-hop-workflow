@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SDD Evidence Event",
+  "type": "object",
+  "required": ["at", "feature", "kind", "status"],
+  "properties": {
+    "at": { "type": "string", "format": "date-time" },
+    "feature": { "type": "string" },
+    "task": { "type": "string" },
+    "agent": { "type": "string" },
+    "kind": { "enum": ["test", "contract-test", "build", "lint", "migration-dry-run", "manual", "review", "environment-boundary"] },
+    "command": { "type": "string" },
+    "status": { "enum": ["passed", "failed", "partial", "not_run"] },
+    "summary": { "type": "string" },
+    "artifact": { "type": "string" },
+    "wave": { "type": "string", "pattern": "^wave-[1-9][0-9]*$" },
+    "attempt": { "type": "integer", "minimum": 1 },
+    "role": { "enum": ["coordinator", "executor", "validator", "fixer"] }
+  },
+  "additionalProperties": false
+}

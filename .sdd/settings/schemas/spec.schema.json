@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://sdd.local/schemas/spec.schema.json",
+  "title": "SDD Specification Metadata v2",
+  "type": "object",
+  "required": ["schema_version", "feature_name", "created_at", "updated_at", "language", "revision", "task_contract_version", "context_profiles", "lifecycle"],
+  "properties": {
+    "schema_version": { "const": 2 },
+    "feature_name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "updated_at": { "type": "string", "format": "date-time" },
+    "language": { "type": "string", "minLength": 2 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "task_contract_version": { "type": "integer", "minimum": 1 },
+    "context_profiles": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "source_discovery": {
+      "type": "object",
+      "required": ["name", "iteration", "path"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "iteration": { "type": "integer", "minimum": 1 },
+        "path": { "type": "string", "pattern": "^\\.sdd/discoveries/" }
+      },
+      "additionalProperties": false
+    },
+    "closure": {
+      "type": "object",
+      "required": ["status", "reason", "closed_by", "closed_at", "prior_phase", "note"],
+      "properties": {
+        "status": { "const": "closed" },
+        "reason": { "enum": ["obsolete", "superseded", "cancelled", "duplicate", "no-longer-needed"] },
+        "closed_by": { "type": "string", "minLength": 1 },
+        "closed_at": { "type": "string", "format": "date-time" },
+        "prior_phase": { "enum": ["requirements", "design", "tasks", "implementation", "validation", "complete"] },
+        "note": { "type": "string", "minLength": 1 },
+        "superseded_by": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" }
+      },
+      "additionalProperties": false
+    },
+    "lifecycle": {
+      "type": "object",
+      "required": ["phase", "requirements", "design", "tasks", "implementation", "validation"],
+      "properties": {
+        "phase": { "enum": ["requirements", "design", "tasks", "implementation", "validation", "complete", "closed"] },
+        "requirements": { "$ref": "#/$defs/artifact" },
+        "design": { "$ref": "#/$defs/artifact" },
+        "tasks": { "$ref": "#/$defs/artifact" },
+        "implementation": { "enum": ["not_started", "in_progress", "blocked", "implemented", "validated"] },
+        "validation": { "enum": ["not_started", "in_progress", "passed", "failed", "partial"] }
+      },
+      "additionalProperties": false
+    },
+    "migration_history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["at", "event"],
+        "properties": {
+          "at": { "type": "string", "format": "date-time" },
+          "event": { "type": "string" },
+          "from_phase": { "type": "string" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "gate_history": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateHistory" }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "lifecycle": {
+            "properties": { "phase": { "const": "closed" } },
+            "required": ["phase"]
+          }
+        }
+      },
+      "then": { "required": ["closure"] }
+    }
+  ],
+  "$defs": {
+    "artifact": {
+      "type": "object",
+      "required": ["status"],
+      "properties": {
+        "status": { "enum": ["missing", "draft", "review_required", "approved", "superseded"] },
+        "approved_by": { "type": "string" },
+        "approved_at": { "type": "string", "format": "date-time" },
+        "content_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "approved" } }, "required": ["status"] },
+          "then": { "required": ["approved_by", "approved_at", "content_hash"] }
+        }
+      ],
+      "additionalProperties": false
+    },
+    "gateHistory": {
+      "type": "object",
+      "required": ["at", "gate", "decision", "actor", "mode", "content_hash"],
+      "properties": {
+        "at": { "type": "string", "format": "date-time" },
+        "gate": { "enum": ["requirements", "design", "tasks"] },
+        "decision": { "enum": ["go", "no-go"] },
+        "actor": { "type": "string", "minLength": 1 },
+        "mode": { "enum": ["manual", "manual-override", "delegated-auto-sdd"] },
+        "reason": { "type": "string", "minLength": 1 },
+        "content_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "mode": { "const": "manual-override" } }, "required": ["mode"] },
+          "then": { "required": ["reason"] }
+        }
+      ],
+      "additionalProperties": false
+    }
+  }
+}

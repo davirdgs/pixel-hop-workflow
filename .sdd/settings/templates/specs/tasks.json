@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "feature": "{{FEATURE_NAME}}",
+  "tasks": [
+    {
+      "id": "1",
+      "title": "{{TASK_DESCRIPTION}}",
+      "status": "pending",
+      "optional": false,
+      "parallel": false,
+      "requirements": ["1.1"],
+      "dependencies": [],
+      "write_scope": ["{{PATH_OR_MODULE_PREFIX}}"],
+      "verification": "{{STRATEGY}}",
+      "evidence": "{{EXPECTED_EVIDENCE}}"
+    }
+  ]
+}
