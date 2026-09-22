@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Security Standards
 
 [Purpose: define security posture with patterns for validation, authz, secrets, and data]

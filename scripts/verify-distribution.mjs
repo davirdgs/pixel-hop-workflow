@@ -145,8 +145,9 @@ const forbidden = ['AstroMap', 'useastromap', 'pixelhop.AstroMap'];
 const scanRoots = ['.sdd/settings', '.sdd/tools', '.claude/commands/sdd', '.codex/skills/sdd'];
 function scan(directory) {
   for (const entry of readdirSync(directory, { withFileTypes: true })) {
+    // OS metadata (.DS_Store) is gitignored and never installed; skip it instead of failing.
+    if (entry.name === '.DS_Store') continue;
     const file = path.join(directory, entry.name);
-    if (entry.name === '.DS_Store') errors.push(`forbidden OS metadata: ${path.relative(root, file)}`);
     if (entry.isDirectory()) scan(file);
     else {
       const text = readFileSync(file, 'utf8');

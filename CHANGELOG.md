@@ -1,5 +1,13 @@
 # Changelog
 
+## 2.11.0 — 2026-09-22
+
+- Established provenance for the SDD rules and templates: 9 rules and 16 templates under `.sdd/settings/` are derived from [cc-sdd](https://github.com/gotalab/cc-sdd) (MIT, © 2025 gotalab), v2.0.x, and are now used under that license.
+- Added the `<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->` header to every derived Markdown rule and template; `templates/specs/init.json` is covered by `README.md` and `NOTICE`.
+- Added a "Third-party sources" section to `README.md` and the cc-sdd MIT license text to `NOTICE`.
+- Updated `config.example.json` context profiles: `notifications` now loads `security.md`; `cross-platform` loads `ios-architecture.md`, `android-architecture.md`, and `api-standards.md`.
+- `npm run verify` now skips macOS `.DS_Store` files instead of failing, and the installer no longer copies them into target projects.
+
 ## 2.10.0 — 2026-07-20
 
 - Added auditable human GO/NO-GO overrides for discovery, artifact review, and release-planning gates without allowing overrides to fabricate implementation, launch, or metric evidence.

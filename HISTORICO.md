@@ -163,6 +163,19 @@ Cada entrada abaixo é ancorada em evidência verificável no próprio repositó
 
 ---
 
+### 2.11.0 — Proveniência das regras SDD e substituição de fonte restrita
+**2026-09-22**
+
+**Problema.** As regras e templates centrais do SDD em `.sdd/settings/` (EARS, steering, gap analysis, design, tarefas e revisões) derivavam do cc-sdd (`gotalab/cc-sdd`, MIT), mas esse vínculo não estava registrado em lugar nenhum. Isso escondia do estudo de caso quais partes do método eram herdadas e quais eram contribuição própria.
+
+**Decisão.** Reconstruir a proveniência arquivo a arquivo em vez de reescrever tudo às cegas. A comparação com todo o histórico Git do cc-sdd (`gotalab/cc-sdd`, MIT) mostrou que 25 arquivos do repositório restrito são cópias, idênticas ou com renomeações triviais, do cc-sdd v2.0.x. Esses arquivos passam a ser usados a partir da fonte aberta original, com atribuição explícita.
+
+**Mecanismos introduzidos.** Cabeçalho `<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->` em 9 rules e 15 templates Markdown; seção "Third-party sources" no README; texto da licença MIT no NOTICE; ajuste dos perfis de contexto `notifications` e `cross-platform` no exemplo de configuração.
+
+**Onde verificar.** `README.md` (seção *Authorship and license*) · `NOTICE` · `.sdd/settings/rules/*.md` e `.sdd/settings/templates/{specs,steering,steering-custom}/*.md` (cabeçalho) · `.sdd/config.example.json` (bloco `context.profiles`)
+
+---
+
 ## Linhas de evolução
 
 Lidas em conjunto, as versões seguem três linhas contínuas — úteis para quem analisa a trajetória em vez de versões isoladas:

@@ -163,7 +163,15 @@ migrated additively — their history is never rewritten just to adopt a newer v
 
 ## Authorship and license
 
-Copyright 2026 Davi Rodrigues. Original work, authored and maintained by Davi Rodrigues.
+Copyright 2026 Davi Rodrigues. Authored and maintained by Davi Rodrigues.
+
+### Third-party sources
+
+Parts of the SDD rules and templates under `.sdd/settings/` are derived from
+[cc-sdd](https://github.com/gotalab/cc-sdd) (MIT License, © 2025 gotalab), based on its v2.0.x
+templates (`tools/cc-sdd/templates/shared/settings/`) and modified for this framework. Derived rule
+files carry the header `<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->`. The MIT license text
+is reproduced in [`NOTICE`](NOTICE). All other content is original work by Davi Rodrigues.
 
 Licensed under the Apache License, Version 2.0. See [`LICENSE`](LICENSE) for the full terms and
 [`NOTICE`](NOTICE) for attribution requirements.

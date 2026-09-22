@@ -115,7 +115,7 @@ for (const operation of operations) {
   if (dryRun) continue;
   if (update && existsSync(destination)) rmSync(destination, { recursive: true, force: true });
   mkdirSync(path.dirname(destination), { recursive: true });
-  cpSync(source, destination, { recursive: true });
+  cpSync(source, destination, { recursive: true, filter: (file) => path.basename(file) !== '.DS_Store' });
 }
 
 for (const guidanceUpdate of guidanceUpdates) {

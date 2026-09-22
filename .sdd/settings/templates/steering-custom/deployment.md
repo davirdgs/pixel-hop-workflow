@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Deployment Standards
 
 [Purpose: safe, repeatable releases with clear environment and pipeline patterns]

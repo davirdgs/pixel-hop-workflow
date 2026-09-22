@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # API Standards
 
 [Purpose: consistent API patterns for naming, structure, auth, versioning, and errors]

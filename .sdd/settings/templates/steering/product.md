@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Product Overview
 
 [Brief description of what this product does and who it serves]

@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Error Handling Standards
 
 [Purpose: unify how errors are classified, shaped, propagated, logged, and monitored]

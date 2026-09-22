@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Technical Design Rules and Principles
 
 ## Core Design Principles

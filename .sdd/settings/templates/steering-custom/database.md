@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Database Standards
 
 [Purpose: guide schema design, queries, migrations, and integrity]

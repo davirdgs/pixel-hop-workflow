@@ -1,5 +1,5 @@
 {
-  "framework_version": "2.10.0",
+  "framework_version": "2.11.0",
   "default_language": "en",
   "project_profile": "mobile-platform",
   "stack": {
@@ -29,9 +29,9 @@
       ],
       "auth": [".sdd/steering/authentication.md", ".sdd/steering/security.md"],
       "analytics": [".sdd/steering/security.md", ".sdd/steering/testing.md"],
-      "notifications": [".sdd/steering/cross-repo.md", ".sdd/steering/security.md"],
+      "notifications": [".sdd/steering/security.md"],
       "deployment": [".sdd/steering/deployment.md", ".sdd/steering/security.md"],
-      "cross-platform": [".sdd/steering/cross-repo.md"]
+      "cross-platform": [".sdd/steering/ios-architecture.md", ".sdd/steering/android-architecture.md", ".sdd/steering/api-standards.md"]
     }
   },
   "verification": {

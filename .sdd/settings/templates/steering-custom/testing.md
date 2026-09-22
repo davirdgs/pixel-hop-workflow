@@ -1,3 +1,4 @@
+<!-- Derived from cc-sdd (MIT, © 2025 gotalab) -->
 # Testing Standards
 
 [Purpose: guide what to test, where tests live, and how to structure them]
